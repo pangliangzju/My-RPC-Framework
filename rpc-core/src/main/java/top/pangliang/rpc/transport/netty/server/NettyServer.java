@@ -8,6 +8,9 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateHandler;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import top.pangliang.rpc.codec.CommonDecoder;
 import top.pangliang.rpc.codec.CommonEncoder;
 import top.pangliang.rpc.hook.ShutdownHook;
@@ -23,6 +26,8 @@ import java.util.concurrent.TimeUnit;
  *
  * @author pangliang
  */
+@Data
+@AllArgsConstructor
 public class NettyServer extends AbstractRpcServer {
 
     private final CommonSerializer serializer;
@@ -39,6 +44,8 @@ public class NettyServer extends AbstractRpcServer {
         this.serializer = CommonSerializer.getByCode(serializer);
         scanServices();
     }
+
+
 
     @Override
     public void start() {

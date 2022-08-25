@@ -1,5 +1,8 @@
 package top.pangliang.rpc.transport;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.pangliang.rpc.annotation.Service;
@@ -16,12 +19,16 @@ import java.util.Set;
 /**
  * @author pangliang
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class AbstractRpcServer implements RpcServer {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected String host;
     protected int port;
+    protected int weight;
 
     protected ServiceRegistry serviceRegistry;
     protected ServiceProvider serviceProvider;

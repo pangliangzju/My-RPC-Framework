@@ -1,5 +1,7 @@
 package top.pangliang.rpc.transport.socket.server;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import top.pangliang.rpc.factory.ThreadPoolFactory;
 import top.pangliang.rpc.handler.RequestHandler;
 import top.pangliang.rpc.hook.ShutdownHook;
@@ -19,6 +21,8 @@ import java.util.concurrent.ExecutorService;
  *
  * @author pangliang
  */
+@Data
+@AllArgsConstructor
 public class SocketServer extends AbstractRpcServer {
 
     private final ExecutorService threadPool;
