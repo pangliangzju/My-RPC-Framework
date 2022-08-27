@@ -49,12 +49,15 @@ public class NettyClient implements RpcClient {
     public NettyClient() {
         this(DEFAULT_SERIALIZER, new RandomLoadBalancer());
     }
+
     public NettyClient(LoadBalancer loadBalancer) {
         this(DEFAULT_SERIALIZER, loadBalancer);
     }
+
     public NettyClient(Integer serializer) {
         this(serializer, new RandomLoadBalancer());
     }
+
     public NettyClient(Integer serializer, LoadBalancer loadBalancer) {
         this.serviceDiscovery = new NacosServiceDiscovery(loadBalancer);
         this.serializer = CommonSerializer.getByCode(serializer);
@@ -92,5 +95,4 @@ public class NettyClient implements RpcClient {
         }
         return resultFuture;
     }
-
 }

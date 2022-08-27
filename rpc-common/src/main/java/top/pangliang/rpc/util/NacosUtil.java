@@ -17,6 +17,7 @@ import java.util.Set;
 
 /**
  * 管理Nacos连接等工具类
+ *
  * @author pangliang
  */
 public class NacosUtil {
@@ -49,8 +50,12 @@ public class NacosUtil {
 
     }
 
-    public static void registerService(String serviceName, InetSocketAddress address,int weight) throws NacosException {
+    public static void registerService(String serviceName, InetSocketAddress address, int weight) throws NacosException {
         namingService.registerInstance(serviceName, address.getHostName(), address.getPort());
+        List<Instance> allInstances = namingService.getAllInstances(serviceName);
+        for (Instance instance : allInstances) {
+            instance.setWeight(weight);
+        }
         NacosUtil.address = address;
         serviceNames.add(serviceName);
 
@@ -61,11 +66,11 @@ public class NacosUtil {
     }
 
     public static void clearRegistry() {
-        if(!serviceNames.isEmpty() && address != null) {
+        if (!serviceNames.isEmpty() && address != null) {
             String host = address.getHostName();
             int port = address.getPort();
             Iterator<String> iterator = serviceNames.iterator();
-            while(iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 String serviceName = iterator.next();
                 try {
                     namingService.deregisterInstance(serviceName, host, port);

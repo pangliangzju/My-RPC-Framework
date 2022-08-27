@@ -18,6 +18,7 @@ public class NettyTestClient {
     public static void main(String[] args) {
         RpcClient client = new NettyClient(CommonSerializer.PROTOBUF_SERIALIZER);
         RpcClientProxy rpcClientProxy = new RpcClientProxy(client);
+        //HelloService是接口，客户端本地也有信息，可以生成代理
         HelloService helloService = rpcClientProxy.getProxy(HelloService.class);
         HelloObject object = new HelloObject(12, "This is a message");
         String res = helloService.hello(object);
